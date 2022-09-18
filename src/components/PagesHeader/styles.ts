@@ -1,3 +1,4 @@
+import { THEME } from './../../theme/THEME';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -7,6 +8,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: "space-between",
     alignItems: "center"   
+  },
+  title: {
+    color: THEME.COLORS.TEXT,
+    fontFamily: THEME.FONT_FAMILY.SEMI_BOLD,
+    fontSize: THEME.FONT_SIZE.LG
   },
   emptyView: {
     width: 50,

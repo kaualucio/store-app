@@ -10,12 +10,12 @@ export interface ProductData {
   title: string,
   price: number,
   description: string,
-  category: {
-    id: number,
-    title: string,
-    image: string,
-  },
-  images: string[]
+  category: string,
+  image: string,
+  rating: {
+    rate: number,
+    count: number
+  }
 }
 
 interface Props extends TouchableOpacityProps {
@@ -27,7 +27,9 @@ export function ProductCard({data, ...rest}: Props) {
     <TouchableOpacity activeOpacity={.8} style={styles.container} {...rest}>
       <ImageBackground 
         style={styles.banner}
-        source={{uri: data?.images[0]}}>
+        source={{uri: data.image}}
+        resizeMode="stretch"
+        >
         <LinearGradient colors={THEME.COLORS.FOOTER}  style={styles.productInfo}>
             <Text numberOfLines={1} style={styles.title}>{data?.title}</Text>
             <Text style={styles.price}>R${data?.price}</Text>

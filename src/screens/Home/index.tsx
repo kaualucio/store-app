@@ -8,7 +8,7 @@ import { TextInput, View, TouchableWithoutFeedback, Keyboard, FlatList, ScrollVi
 import { MagnifyingGlass } from 'phosphor-react-native';
 import { THEME } from '../../theme/THEME';
 import { ProductData, ProductCard } from '../../components/ProductCard';
-import { categories } from '../../utils/categories';
+import { CATEGORIES, TRANSLATED_CATEGORIES } from '../../utils/categories';
 import { Heading } from '../../components/Heading';
 import { Background } from '../../components/Background';
 import { useNavigation } from '@react-navigation/native';
@@ -19,16 +19,16 @@ export function Home() {
   const [products, setProducts] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
-    fetch('https://api.escuelajs.co/api/v1/products')
+    fetch('https://fakestoreapi.com/products')
     .then(res => res.json())
     .then(data => {
       let productsRes = []
-      categories.map(category => {
+      CATEGORIES.map((category, index) => {
 
-          productsRes[category.id - 1] = []
+          productsRes[index] = []
           data.filter((product: ProductData) => {
-            if(category.id === product.category.id) {
-              return productsRes[category.id - 1].push(product)
+            if(category === product.category) {
+              return productsRes[index].push(product)
             }
           })
       })
@@ -62,7 +62,7 @@ export function Home() {
                     {
                       products.map((product, index) => (
                         <View key={index}>
-                          <Heading title={categories.find(category => category.id === product[0].category.id).name} />
+                          <Heading title={TRANSLATED_CATEGORIES[product[0].category]} />
                           <FlatList 
                             data={product}
                             keyExtractor={(item) => String(item.id)}

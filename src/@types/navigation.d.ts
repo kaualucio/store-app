@@ -3,12 +3,12 @@ interface Product {
   title: string,
   price: number,
   description: string,
-  category: {
-    id: number,
-    title: string,
-    image: string,
-  },
-  images: string[]
+  category: string,
+  image: string,
+  rating: {
+    rate: number,
+    count: number
+  }
 }
 
 export declare global {
@@ -16,6 +16,7 @@ export declare global {
     interface RootParamList {
       home: undefined,
       product: Product
+      cart: undefined
     }
   }
 }

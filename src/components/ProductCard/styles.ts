@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
   },
   productInfo: {
     paddingBottom: 8,
-    paddingLeft: 8
+    paddingHorizontal: 10
   },
   title: {
     color: THEME.COLORS.TEXT,

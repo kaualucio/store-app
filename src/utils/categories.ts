@@ -1,18 +1,13 @@
-export const categories = [
-  {
-    id: 1,
-    name: "Roupas",
-  },
-  {
-    id: 2,
-    name: "Eletrônicos",
-  },
-  {
-    id: 3,
-    name: "Mobília",
-  },
-  {
-    id: 4,
-    name: "Sapatos",
-  },
+export const CATEGORIES = [
+  "electronics",
+  "jewelery",
+  "men's clothing",
+  "women's clothing"
 ]
+
+export const TRANSLATED_CATEGORIES = {
+  "electronics": "Eletrônicos",
+  "jewelery": "Joias",
+  "men's clothing": "Roupas Masculinas",
+  "women's clothing": "Roupas Femininas"
+}

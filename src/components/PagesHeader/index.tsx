@@ -1,23 +1,28 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { THEME } from '../../theme/THEME';
 import { IconButton } from '../IconButton';
-import { ArrowLeft, CaretLeft, Heart } from 'phosphor-react-native';
+import { CaretLeft, Heart } from 'phosphor-react-native';
 
 import { styles } from './styles';
-import { Heading } from '../Heading';
 
 interface Props {
-  handleFunction: () => void
+  title: string,
+  handleFunction: () => void,
+  iconBtn?: boolean
 }
 
-export function PagesHeader({ handleFunction }: Props) {
+export function PagesHeader({ title, handleFunction, iconBtn = false }: Props) {
   return (
     <View style={styles.container}>
       <IconButton onPress={handleFunction} icon={<CaretLeft size={28} color={THEME.COLORS.TEXT} />} />
-      <Heading title="Produto" />
-      {/* <View style={styles.emptyView} /> */}
-      <IconButton icon={<Heart size={28} color={THEME.COLORS.TEXT} />} />
+      <Text style={styles.title}>{title}</Text>
+      {
+        iconBtn 
+        ? <IconButton icon={<Heart size={28} color={THEME.COLORS.TEXT} />} />
+        :  <View style={styles.emptyView} />
+      }
+
     </View>
   );
 }
