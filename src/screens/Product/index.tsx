@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { ShoppingCart } from 'phosphor-react-native';
+import { Check, ShoppingCart } from 'phosphor-react-native';
 import React from 'react';
 import { View, Image, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -14,10 +14,11 @@ import { THEME } from '../../theme/THEME';
 import { styles } from './styles';
 
 export function Product() {
-  const { addToCart } = useCart()
+  const { addToCart, cart } = useCart()
   const navigation = useNavigation()
   const route = useRoute()
   const product = route.params as ProductData
+  const productsIsAlreadyInCart = cart.find(item => item.id === product.id)
   
   function handleGoBack() {
     navigation.goBack()
@@ -39,8 +40,12 @@ export function Product() {
           </View>
             <Button 
               onPress={() => addToCart(product)}
-              icon={<ShoppingCart size={25} color={THEME.COLORS.TEXT} />}
-              label="Adicionar ao carrinho" />
+              icon={
+                !productsIsAlreadyInCart
+                ? <ShoppingCart size={25} color={THEME.COLORS.TEXT} />
+                : <Check size={25} color={THEME.COLORS.TEXT} />
+              }
+              label={!productsIsAlreadyInCart ? "Adicionar ao carrinho" : "Já está no carrinho"} />
         </View>
       </SafeAreaView>
     </Background>

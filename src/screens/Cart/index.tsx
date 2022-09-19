@@ -17,6 +17,11 @@ export function Cart() {
   function handleGoBack() {
     navigation.goBack()
   }
+
+  function handleGoToPaymentScreen() {
+    navigation.navigate('payment')
+  }
+
   return (
     <Background>
       <SafeAreaView style={styles.container}>
@@ -33,7 +38,7 @@ export function Cart() {
             }
           </ScrollView>
           <Text style={styles.totalPrice}>Total: R${fullPrice}</Text>
-          <Button label="Checkout" />
+          <Button onPress={handleGoToPaymentScreen} label="Checkout" />
         </View>
       </SafeAreaView>
     </Background>

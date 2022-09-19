@@ -16,7 +16,8 @@ export declare global {
     interface RootParamList {
       home: undefined,
       product: Product
-      cart: undefined
+      cart: undefined,
+      payment: undefined
     }
   }
 }

@@ -12,10 +12,13 @@ export interface Product extends ProductData {
 interface CartContextProps {
   cart: Product[],
   quantity: number,
+  isCheckout: boolean,
+  totalQuantity: number,
   fullPrice: number,
   addToCart: (product: ProductData) => void,
   handleChangeQuantity: (type: string) => void,
   handleTotalPrice: (product:  Product | ProductData) => void
+  handleChangeCheckoutState: () => void
 }
 
 
@@ -23,6 +26,8 @@ const CartContext = createContext({} as CartContextProps)
 
 function CartContextProvider({ children }: CartContextProviderProps) {
   const [cart, setCart] = useState<Product[]>([])
+  const [isCheckout, setIsCheckout] = useState(false)
+  const [totalQuantity, setTotalQuantity] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [fullPrice, setFullPrice] = useState(0)
 
@@ -32,6 +37,19 @@ function CartContextProvider({ children }: CartContextProviderProps) {
     }else if(type === 'desc') {
       setQuantity(prevState => prevState === 1 ? 1 : prevState -= 1)
     }
+  }
+
+  useEffect(() => {
+    if(isCheckout) {
+      let quantity = 0
+      cart.map(item => quantity += item.quantity)
+      setTotalQuantity(quantity)
+      setIsCheckout(false)
+    }
+  }, [isCheckout])
+
+  function handleChangeCheckoutState() {
+    setIsCheckout(true)
   }
 
   function addToCart(product: ProductData) {
@@ -61,10 +79,13 @@ function CartContextProvider({ children }: CartContextProviderProps) {
       value={{
         cart,
         quantity,
+        isCheckout,
+        totalQuantity,
         fullPrice,
         addToCart,
         handleChangeQuantity,
-        handleTotalPrice  
+        handleTotalPrice,
+        handleChangeCheckoutState
       }}
     >
       {children}
