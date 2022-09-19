@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     padding: 20
   },
   creditCard: {
+    flex: 1,
     marginTop: 32,
     alignItems: 'center'
   },

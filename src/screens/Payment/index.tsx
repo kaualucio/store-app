@@ -4,6 +4,7 @@ import React, {useEffect} from 'react';
 import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Background } from '../../components/Background';
+import { Button } from '../../components/Button';
 import { PagesHeader } from '../../components/PagesHeader';
 import { useCart } from '../../context/CartContext';
 import { THEME } from '../../theme/THEME';
@@ -11,7 +12,7 @@ import { THEME } from '../../theme/THEME';
 import { styles } from './styles';
 
 export function Payment() {
-  const { cart, fullPrice, totalQuantity, handleChangeCheckoutState } = useCart();
+  const { fullPrice, totalQuantity, handleChangeCheckoutState } = useCart();
   const { confirmPayment } = useStripe();
   const navigation = useNavigation()
   function handleGoBack() {
@@ -49,13 +50,11 @@ export function Payment() {
               height: 50,
               marginVertical: 30,
             }}
-            onCardChange={(cardDetails) => {
-              console.log('cardDetails', cardDetails);
-            }}
-            onFocus={(focusedField) => {
-              console.log('focusField', focusedField);
-            }}
+
           />
+        <Button onPress={() => confirmPayment('sk_test_51KzOgaBzJP4jgpHSOInixM50BbSBdosyMZXxs5MEnCgkyIf6wstsyuhYijM2o0H78At68yJKB5MIKQPbSGdELdwU006jzWrOtz', {
+          paymentMethodType: 'Card',
+        })} label="Finalizar" />
         </View>
       </SafeAreaView>
     </Background>
